@@ -1,10 +1,9 @@
 from importlib import import_module
-
-from dynaconf import FlaskDynaconf
+from src.config import settings
 
 
 def load_extensions(app):
-    for extension in app.config.EXTENSIONS:
+    for extension in settings.EXTENSIONS:
         # Split data in form `extension.path:factory_function`
         module_name, factory = extension.split(":")
         # Dynamically import extension module.
@@ -14,4 +13,4 @@ def load_extensions(app):
 
 
 def init_app(app, **config):
-    FlaskDynaconf(app, **config)
+    app.config.from_object(settings)

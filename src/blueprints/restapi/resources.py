@@ -7,9 +7,7 @@ from src.models import Product
 class ProductResource(Resource):
     def get(self):
         products = Product.query.all() or abort(204)
-        return jsonify(
-            {"products": [product.to_dict() for product in products]}
-        )
+        return jsonify({"products": [product.to_dict() for product in products]})
 
 
 class ProductItemResource(Resource):

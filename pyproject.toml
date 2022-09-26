@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "template-flask"
+version = "0.1.0"
+description = ""
+authors = ["Marcelo Lino <mdslino@gmail.com>"]
+readme = "README.md"
+packages = []
+
+[tool.poetry.dependencies]
+Flask = "^2.2.2"
+Flask-Admin = "^1.6.0"
+Flask-Bootstrap = "^3.3.7.1"
+Flask-RESTful = "^0.3.9"
+flask-simplelogin = "^0.1.1"
+Flask-SQLAlchemy = "^2.5.1"
+pydantic = {extras = ["email"], version = "^1.10.2"}
+python = "^3.10"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.8.0"
+flake8 = "^5.0.4"
+Flask-DebugToolbar = "^0.13.1"
+flask-shell-ipython = "^0.4.1"
+ipdb = "^0.13.9"
+isort = "^5.10.1"
+mypy = "^0.971"
+python-dotenv = "^0.21.0"
+
+
+[tool.poetry.group.test.dependencies]
+pytest-flask = "^1.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

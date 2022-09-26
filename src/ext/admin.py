@@ -3,7 +3,7 @@ from flask_admin.base import AdminIndexView
 from flask_admin.contrib import sqla
 from flask_simplelogin import login_required
 from werkzeug.security import generate_password_hash
-
+from src.config import settings
 from src.ext.database import db
 from src.models import Product, User
 
@@ -14,7 +14,7 @@ admin = Admin()
 
 
 class UserAdmin(sqla.ModelView):
-    column_list = ['username']
+    column_list = ["username"]
     can_edit = False
 
     def on_model_change(self, form, model, is_created):
@@ -22,7 +22,7 @@ class UserAdmin(sqla.ModelView):
 
 
 def init_app(app):
-    admin.name = app.config.TITLE
+    admin.name = settings.TITLE
     admin.template_mode = "bootstrap3"
     admin.init_app(app)
     admin.add_view(sqla.ModelView(Product, db.session))

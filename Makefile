@@ -10,10 +10,7 @@ test:
 	pytest pydaria/tests -v
 
 install:
-	pip install --upgrade pip
-	pip install -r requirements.txt
-	pip install -r requirements_dev.txt
-	pip install -r requirements_test.txt
+	poetry install
 
 clean:
 	@find . -name '*.pyc' -exec rm -rf {} \;

@@ -17,9 +17,7 @@ def drop_db():
 def populate_db():
     """Populate db with sample data"""
     data = [
-        Product(
-            id=1, name="Ciabatta", price="10", description="Italian Bread"
-        ),
+        Product(id=1, name="Ciabatta", price="10", description="Italian Bread"),
         Product(id=2, name="Baguete", price="15", description="French Bread"),
         Product(id=3, name="Pretzel", price="20", description="German Bread"),
     ]
@@ -35,8 +33,8 @@ def init_app(app):
 
     # add a single command
     @app.cli.command()
-    @click.option('--username', '-u')
-    @click.option('--password', '-p')
+    @click.option("--username", "-u")
+    @click.option("--password", "-p")
     def add_user(username, password):
         """Adds a new user to the database"""
         return create_user(username, password)
