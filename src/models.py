@@ -1,4 +1,4 @@
-from pydaria.ext.database import db
+from src.ext.database import db
 from sqlalchemy_serializer import SerializerMixin
 
 

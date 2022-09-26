@@ -39,7 +39,7 @@ pip install -r requirements_test.txt
 ## Testando
 
 ```bash
-pytest pydaria/tests
+pytest src/tests
 ```
 
 ## Executando
@@ -68,7 +68,7 @@ Acesse:
 ```bash
 .
 ├── Makefile
-├── pydaria  (MAIN PACKAGE)
+├── src  (MAIN PACKAGE)
 │   ├── app.py  (APP FACTORIES)
 │   ├── blueprints  (BLUEPRINT FACTORIES)
 │   │   ├── __init__.py
