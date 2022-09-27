@@ -6,7 +6,9 @@ class Settings(BaseSettings):
     FLASK_ADMIN_NAME: str = "Admin"
     FLASK_ADMIN_TEMPLATE_MODE: str = "bootstrap3"
     FLASK_ADMIN_SWATCH: str = "cerulean"
-    SQLALCHEMY_DATABASE_URI: str = "sqlite:///development.db"
+    SQLALCHEMY_DATABASE_URI: str = (
+        "postgresql://postgres:postgres@localhost:5432/postgres"
+    )
     SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
     TITLE: str = "Template"
     SECRET_KEY: str = "jadkfbsdkjbfbh"
