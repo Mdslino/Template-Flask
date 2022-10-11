@@ -16,11 +16,11 @@ class Settings(BaseSettings):
     EXTENSIONS: list[str] = [
         "src.ext.appearance:init_app",
         "src.ext.database:init_app",
+        "src.ext.migrations:init_app",
         "src.ext.auth:init_app",
-        "src.ext.admin:init_app",
-        "src.ext.commands:init_app",
         "src.blueprints.webui:init_app",
         "src.blueprints.restapi:init_app",
+        "src.auth.blueprints.webui:init_app",
     ]
 
     TEMPLATES_AUTO_RELOAD: str = True

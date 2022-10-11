@@ -1,5 +1,5 @@
-from flask_bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap5
 
 
 def init_app(app):
-    Bootstrap(app)
+    Bootstrap5(app)
