@@ -9,8 +9,7 @@ RUN pip install --upgrade pip poetry
 COPY poetry.lock pyproject.toml ./
 
 RUN poetry config virtualenvs.create false \
-    && poetry install --no-interaction --no-ansi \
-    && rm -rf /root/.cache/pypoetry
+    && poetry install --no-interaction --no-ansi --no-cache
 
 COPY . .
 

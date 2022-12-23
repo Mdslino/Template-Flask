@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-.PHONY: all clean install test black isort format-code sort-imports flake8 mypy black-check isort-check lint
+.PHONY: all clean install test black isort format-code sort-imports flake8 mypy black-check isort-check lint run run-dev
 
 help:
 	@$(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
@@ -11,6 +11,12 @@ test:
 
 test-coverage:
 	pytest --cov=src tests/ -v
+
+run:
+	@gunicorn "src.app:create_app()" -k gevent -b 0.0.0.0:8000 -w 4 --preload --access-logfile=- --error-logfile=- --log-level info
+
+run-dev:
+	@gunicorn "src.app:create_app()" -k gevent --bind 0.0.0.0:8000 --preload --reload --access-logfile=- --error-logfile=- --log-level debug
 
 install:
 	poetry install

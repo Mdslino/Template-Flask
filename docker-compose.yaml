@@ -13,7 +13,7 @@ services:
       SQLALCHEMY_DATABASE_URI: postgresql://postgres:postgres@db:5432/postgres
     volumes:
       - .:/app
-    command: gunicorn -k gevent --bind 0.0.0.0:8000 src.app:create_app() -w 4 --reload --access-logfile - --error-logfile - --log-level debug
+    command: make run-dev
     depends_on:
       db:
         condition: service_healthy
