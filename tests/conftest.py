@@ -6,7 +6,7 @@ from src.ext.database import db
 
 @pytest.fixture(scope="session")
 def min_app():
-    app = minimal_app(F)
+    app = minimal_app()
     return app
 
 

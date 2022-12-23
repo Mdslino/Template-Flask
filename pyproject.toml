@@ -36,6 +36,7 @@ python-dotenv = "^0.21.0"
 [tool.poetry.group.test.dependencies]
 pytest-flask = "^1.2.0"
 pytest-cov = "^4.0.0"
+factory-boy = "^3.2.1"
 
 [tool.isort]
 profile = "black"

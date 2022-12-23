@@ -3,6 +3,7 @@ from uuid import uuid4
 from sqlalchemy.dialects.postgresql import UUID
 from werkzeug.security import check_password_hash, generate_password_hash
 
+from src.auth.exceptions import UserPasswordException
 from src.ext.database import TimestampedModel, db
 
 
