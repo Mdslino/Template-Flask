@@ -64,6 +64,11 @@ extend-exclude = '''
 # this off.
 preview = true
 
+[tool.pytest.ini_options]
+env = [
+    "SQLALCHEMY_DATABASE_URI = postgresql://postgres:postgres@localhost:5432/postgres_test"
+]
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
