@@ -23,11 +23,11 @@ class Settings(BaseSettings):
         "src.auth.blueprints.webui:init_app",
     ]
 
-    TEMPLATES_AUTO_RELOAD: str = True
-    DEBUG_TOOLBAR_ENABLED: str = True
-    DEBUG_TB_INTERCEPT_REDIRECTS: str = False
-    DEBUG_TB_PROFILER_ENABLED: str = True
-    DEBUG_TB_TEMPLATE_EDITOR_ENABLED: str = True
+    TEMPLATES_AUTO_RELOAD: bool = True
+    DEBUG_TOOLBAR_ENABLED: bool = True
+    DEBUG_TB_INTERCEPT_REDIRECTS: bool = False
+    DEBUG_TB_PROFILER_ENABLED: bool = True
+    DEBUG_TB_TEMPLATE_EDITOR_ENABLED: bool = True
     DEBUG_TB_PANELS: list[str] = [
         "flask_debugtoolbar.panels.versions.VersionDebugPanel",
         "flask_debugtoolbar.panels.sqlalchemy.SQLAlchemyDebugPanel",
