@@ -1,4 +1,5 @@
 import pytest
+from sqlalchemy import text
 from sqlalchemy_utils import create_database, database_exists, drop_database
 
 from src.app import create_app, minimal_app
@@ -16,15 +17,15 @@ def min_app():
 def app():
     app = create_app()
     with app.app_context():
-        SQLALCHEMY_DATABASE_URI = app.config["SQLALCHEMY_DATABASE_URI"]
-        if not database_exists(SQLALCHEMY_DATABASE_URI):
-            create_database(SQLALCHEMY_DATABASE_URI)
-        db.session.execute('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"')
+        sqlalchemy_database_uri = app.config["SQLALCHEMY_DATABASE_URI"]
+        if not database_exists(sqlalchemy_database_uri):
+            create_database(sqlalchemy_database_uri)
+        db.session.execute(text('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'))
         db.session.commit()
-        db.create_all(app=app)
+        db.create_all()
         yield app
         db.session.close_all()
-        db.drop_all(app=app)
+        db.drop_all()
 
 
 @pytest.fixture

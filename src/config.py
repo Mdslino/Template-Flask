@@ -1,3 +1,5 @@
+from typing import List
+
 from pydantic import BaseSettings
 
 
@@ -12,8 +14,8 @@ class Settings(BaseSettings):
     SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
     TITLE: str = "Template"
     SECRET_KEY: str = "jadkfbsdkjbfbh"
-    PASSWORD_SCHEMES: list[str] = ["pbkdf2_sha512", "md5_crypt"]
-    EXTENSIONS: list[str] = [
+    PASSWORD_SCHEMES: List[str] = ["pbkdf2_sha512", "md5_crypt"]
+    EXTENSIONS: List[str] = [
         "src.ext.appearance:init_app",
         "src.ext.database:init_app",
         "src.ext.migrations:init_app",
@@ -28,7 +30,7 @@ class Settings(BaseSettings):
     DEBUG_TB_INTERCEPT_REDIRECTS: bool = False
     DEBUG_TB_PROFILER_ENABLED: bool = True
     DEBUG_TB_TEMPLATE_EDITOR_ENABLED: bool = True
-    DEBUG_TB_PANELS: list[str] = [
+    DEBUG_TB_PANELS: List[str] = [
         "flask_debugtoolbar.panels.versions.VersionDebugPanel",
         "flask_debugtoolbar.panels.sqlalchemy.SQLAlchemyDebugPanel",
         "flask_debugtoolbar.panels.timer.TimerDebugPanel",
