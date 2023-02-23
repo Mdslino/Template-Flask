@@ -1,5 +1,6 @@
 import pytest
 from sqlalchemy import text
+from sqlalchemy.orm.session import close_all_sessions
 from sqlalchemy_utils import create_database, database_exists, drop_database
 
 from src.app import create_app, minimal_app
@@ -24,7 +25,7 @@ def app():
         db.session.commit()
         db.create_all()
         yield app
-        db.session.close_all()
+        close_all_sessions()
         db.drop_all()
 
 
