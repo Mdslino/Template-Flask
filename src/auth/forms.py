@@ -22,7 +22,9 @@ class SignupForm(FlaskForm):
             return False
 
         if self.password.data != self.confirm_password.data:
-            self.password.errors.append("Senhas não conferem")
+            error = "Senhas não conferem"
+            self.password.errors.append(error)
+            self.confirm_password.errors.append(error)
             return False
 
         return True
