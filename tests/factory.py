@@ -10,5 +10,5 @@ class UserFactory(SQLAlchemyModelFactory):
         model = User
         sqlalchemy_session = db.session
 
-    username = "my_user"
+    username = "my_username@domain.com"
     password = generate_password_hash("my_password")

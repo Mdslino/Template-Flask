@@ -42,5 +42,7 @@ class Settings(BaseSettings):
         "flask_debugtoolbar.panels.config_vars.ConfigVarsDebugPanel",
     ]
 
+    WTF_CSRF_ENABLED: bool = True
+
 
 settings = Settings()
