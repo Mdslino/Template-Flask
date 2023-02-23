@@ -21,7 +21,6 @@ class Settings(BaseSettings):
         "src.ext.migrations:init_app",
         "src.ext.auth:init_app",
         "src.blueprints.webui:init_app",
-        "src.blueprints.restapi:init_app",
         "src.auth.blueprints.webui:init_app",
     ]
 
