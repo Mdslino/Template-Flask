@@ -1,19 +1,39 @@
 from flask_wtf import FlaskForm
 from wtforms import EmailField, PasswordField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Length
 
 
 class LoginForm(FlaskForm):
-    username = EmailField("Email", validators=[DataRequired()])
-    password = PasswordField("Senha", validators=[DataRequired()])
+    username = EmailField(
+        "Email", validators=[DataRequired(message="Email é obrigatório")]
+    )
+    password = PasswordField(
+        "Senha",
+        validators=[
+            DataRequired(message="Senha é obrigatória"),
+            Length(min=8, message="Senha deve ter no mínimo 8 caracteres"),
+        ],
+    )
     submit = SubmitField("Entrar")
 
 
 class SignupForm(FlaskForm):
-    username = EmailField("Email", validators=[DataRequired()])
-    password = PasswordField("Senha", validators=[DataRequired()])
+    username = EmailField(
+        "Email", validators=[DataRequired(message="Email é obrigatório")]
+    )
+    password = PasswordField(
+        "Senha",
+        validators=[
+            DataRequired(message="Senha é obrigatória"),
+            Length(min=8, message="Senha deve ter no mínimo 8 caracteres"),
+        ],
+    )
     confirm_password = PasswordField(
-        "Confirmar senha", validators=[DataRequired()]
+        "Confirmar senha",
+        validators=[
+            DataRequired(message="Senha é obrigatória"),
+            Length(min=8, message="Senha deve ter no mínimo 8 caracteres"),
+        ],
     )
     submit = SubmitField("Cadastrar")
 

@@ -1,28 +1,40 @@
-{% from 'bootstrap5/nav.html' import render_nav_item %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                {{ render_nav_item('webui.index', 'Home') }}
-            </ul>
-        </div>
-        {% if current_user.is_authenticated %}
-            <a href="{{ url_for('webui_auth.logout') }}">
-                <button class="btn btn-block btn-danger m-1" type="button">Sair</button>
-            </a>
-        {% else %}
-            <a href="{{ url_for('webui_auth.login') }}">
-                <button class="btn btn-block btn-primary m-1" type="button">Entrar</button>
-            </a>
-            <a href="{{ url_for('webui_auth.signup') }}">
-                <button class="btn btn-block btn-success m-1" type="button">Cadastrar</button>
-            </a>
-        {% endif %}
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="https://bulma.io">
+      <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item">
+        Inicio
+      </a>
     </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+            {% if current_user.is_authenticated %}
+                <a class="button is-primary" href="{{ url_for('webui_auth.logout') }}">
+                    <strong>Sair</strong>
+                </a>
+            {% else %}
+                <a class="button is-primary" href="{{ url_for('webui_auth.login') }}">
+                    <strong>Entrar</strong>
+                </a>
+                <a class="button is-light" href="{{ url_for('webui_auth.signup') }}">
+                    Cadastrar
+                </a>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
 </nav>

@@ -160,22 +160,6 @@ files = [
 ]
 
 [[package]]
-name = "bootstrap-flask"
-version = "2.2.0"
-description = "Bootstrap 4 & 5 helper for your Flask projects."
-category = "main"
-optional = false
-python-versions = "*"
-files = [
-    {file = "Bootstrap-Flask-2.2.0.tar.gz", hash = "sha256:40f3bf7d5802e429b2fca286a548bdde816c1185c28aa8df3051cff35cd05cac"},
-    {file = "Bootstrap_Flask-2.2.0-py2.py3-none-any.whl", hash = "sha256:b1fd9be1d22f4f1714a8a596ea2a4a5db9c957ba6db4aea4cb38ae90555233f3"},
-]
-
-[package.dependencies]
-Flask = "*"
-WTForms = "*"
-
-[[package]]
 name = "cffi"
 version = "1.15.1"
 description = "Foreign Function Interface for Python calling C code."
@@ -1952,4 +1936,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8.1"
-content-hash = "9ec4c2147ca476b7b2a5edcc24cf2301763d9613f44de2d4a11327bdf8c5eb43"
+content-hash = "7e3e0cbfc69da099bb63d62d2ef74f392f83532ad2fc7c72363060990f9cbb4c"

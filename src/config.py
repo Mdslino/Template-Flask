@@ -16,7 +16,6 @@ class Settings(BaseSettings):
     SECRET_KEY: str = "jadkfbsdkjbfbh"
     PASSWORD_SCHEMES: List[str] = ["pbkdf2_sha512", "md5_crypt"]
     EXTENSIONS: List[str] = [
-        "src.ext.appearance:init_app",
         "src.ext.database:init_app",
         "src.ext.migrations:init_app",
         "src.ext.auth:init_app",
