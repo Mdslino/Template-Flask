@@ -24,7 +24,6 @@
 <div class="container">
     {% include 'includes/navbar.html' %}
     <div class="columns">
-        {#        <section class="column is-half is-offset-one-quarter">#}
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
@@ -42,13 +41,13 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        {#        </section>#}
-        {% block messages %}{% endblock %}
 
+        {% block messages %}{% endblock %}
         {% block content %}{% endblock %}
     </div>
 </div>
 {% block scripts %}
 {% endblock %}
+{% include 'includes/footer.html' %}
 </body>
 </html>
