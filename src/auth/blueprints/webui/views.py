@@ -6,14 +6,14 @@ from src.auth.forms import LoginForm, SignupForm
 from src.auth.models import User
 from src.ext.database import db
 
-logger = app.logger
-
 
 def login():
     """
     Login View
     Login user and redirect to index page
     """
+    logger = app.logger
+
     form = LoginForm(request.form)
     if request.method == "POST":
         logger.info("Login attempt")
@@ -31,16 +31,26 @@ def login():
                     logger.info("Redirecting to index")
                     return redirect(url_for("webui.index"))
                 else:
-                    logger.warning("User not authenticated, username or password invalid, username: %s", user.username)
+                    logger.warning(
+                        (
+                            "User not authenticated, username or password"
+                            " invalid, username: %s"
+                        ),
+                        user.username,
+                    )
                     flash("Usuário ou senha inválidos.", "danger")
             else:
-                logger.warning("User not found, username: %s", form.username.data)
+                logger.warning(
+                    "User not found, username: %s", form.username.data
+                )
                 flash("Usuário não encontrado.", "danger")
     logger.info("Rendering login page")
     return render_template("auth/login.html", form=form, title="Entrar")
 
 
 def logout():
+    logger = app.logger
+
     logger.info("Logout attempt")
     logout_user()
     logger.info("User logged out")
@@ -54,6 +64,8 @@ def signup():
     Signup View
     Create new user and redirect to index page
     """
+    logger = app.logger
+
     form = SignupForm()
     if request.method == "POST":
         logger.info("Signup attempt")
@@ -62,7 +74,9 @@ def signup():
             if db.session.execute(
                 db.select(User).where(User.username == form.username.data)
             ).scalar_one_or_none():
-                logger.warning("User already exists, username: %s", form.username.data)
+                logger.warning(
+                    "User already exists, username: %s", form.username.data
+                )
                 flash("Usuário já cadastrado.", "warning")
                 logger.info("Redirecting to login")
                 return redirect(url_for("webui_auth.login"))
@@ -71,7 +85,10 @@ def signup():
             user.set_password(form.password.data)
             db.session.add(user)
             db.session.commit()
-            logger.info("User created and commited to database successfully %s", user.username)
+            logger.info(
+                "User created and commited to database successfully %s",
+                user.username,
+            )
             flash("Cadastro realizado com sucesso.", "success")
             logger.info("Redirecting to index")
             login_user(user)
