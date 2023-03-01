@@ -1,105 +1,126 @@
 # Arquitetura Definitiva para Projetos Flask
 
-Tutorial em texto em: https://codeshow.com.br/arquitetura-web-python-flask/
+Esse projeto é um fork do projeto do Bruno Rocha, apresentado na Pyjamas Live 2020. [Arquitetura Definitiva para Projetos Flask](https://github.com/codeshow/003-arquitetura-flask)
 
-Video: https://youtu.be/-qWySnuoaTM
-Slides: http://bit.ly/codeshow-003-arquitetura-flask ou [googledrive](https://docs.google.com/presentation/d/e/2PACX-1vTZfj2xF3-Nf4NZO8V4HNr2rQNt0ci2kP19OT3Uhrzljl7MZj5Txl_AVlNt4upnCl3aYEJDAfiELpd7/pub?start=false&loop=false&delayms=15000)
+O Repositório está disponível como um template para ser usado como base para novos projetos Flask.
 
-Código parte da apresentação na https://pyjamas.live conference
-
----
-
-## Clone
-
-```bash
-git clone https://github.com/codeshow/003-arquitetura-flask.git
-```
-
-## ou faça o download
-
-https://github.com/codeshow/003-arquitetura-flask/archive/new.zip
-
-ou
-
-```bash
-wget https://github.com/codeshow/003-arquitetura-flask/archive/new.zip
-```
 
 ## Ambiente
 
-Python 3.6+
-Ative a sua virtualenv
+Python 3.8+
+
+## Instalando dependências
 
 ```bash
-pip install -r requirements.txt
-pip install -r requirements_dev.txt
-pip install -r requirements_test.txt
+make install
 ```
 
 ## Testando
 
 ```bash
-pytest src/tests
+make test
 ```
 
 ## Executando
 
 ```bash
-flask create-db  # rodar uma vez
-flask populate-db # rodar uma vez
-flask add-user -u admin -p 1234  # adiciona usuario admin
-flask run
+make run
 ```
 
 Acesse:
 
 - Website: http://localhost:5000
-- Admin: http://localhost:5000/admin/
-  - user: admin, senha: 1234
-- API GET:
-  - https://localhost:5000/api/v1/product/
-  - https://localhost:5000/api/v1/product/1
-  - https://localhost:5000/api/v1/product/2
-  - https://localhost:5000/api/v1/product/3
+
+- Endpoints:
+  - https://localhost:5000/auth/login
+  - https://localhost:5000/auth/logout
+  - https://localhost:5000/auth/signup
+
+## Funcionalidades
+* [x] Autenticação
+* [x] Cadastro de usuários
+* [x] Migrações
+* [x] Testes
+* [x] Docker
 
 
 ## Structure
 
 ```bash
 .
+├── docker-compose.yaml
+├── Dockerfile
+├── init.sql
 ├── Makefile
-├── src  (MAIN PACKAGE)
-│   ├── app.py  (APP FACTORIES)
-│   ├── blueprints  (BLUEPRINT FACTORIES)
-│   │   ├── __init__.py
-│   │   ├── restapi  (REST API)
+├── migrations
+│   ├── alembic.ini
+│   ├── env.py
+│   ├── README
+│   ├── script.py.mako
+│   └── versions
+│       └── efd051590cf6_.py
+├── poetry.lock
+├── pyproject.toml
+├── README.md
+├── src
+│   ├── app.py
+│   ├── auth
+│   │   ├── blueprints
 │   │   │   ├── __init__.py
-│   │   │   └── resources.py
-│   │   └── webui  (FRONT END)
+│   │   │   └── webui
+│   │   │       ├── __init__.py
+│   │   │       └── views.py
+│   │   ├── exceptions.py
+│   │   ├── forms.py
+│   │   ├── __init__.py
+│   │   └── models.py
+│   ├── blueprints
+│   │   ├── __init__.py
+│   │   └── webui
 │   │       ├── __init__.py
-│   │       ├── templates
-│   │       │   ├── index.html
-│   │       │   └── product.html
 │   │       └── views.py
-│   ├── ext (EXTENSION FACTORIES)
-│   │   ├── admin.py
-│   │   ├── appearance.py
+│   ├── config.py
+│   ├── ext
 │   │   ├── auth.py
-│   │   ├── commands.py
 │   │   ├── configuration.py
 │   │   ├── database.py
-│   │   └── __init__.py
+│   │   ├── __init__.py
+│   │   └── migrations.py
 │   ├── __init__.py
-│   ├── models.py  (DATABASE MODELS)
-│   └── tests  (TESTS)
-│       ├── conftest.py
-│       ├── __init__.py
-│       └── test_api.py
-├── README.md
-├── requirements_dev.txt
-├── requirements_test.txt
-├── requirements.txt
-└── settings.toml  (SETTINGS)
+│   ├── static
+│   │   ├── css
+│   │   ├── images
+│   │   └── js
+│   │       └── bulma
+│   │           ├── alert.js
+│   │           ├── bulma.js
+│   │           ├── dropdown.js
+│   │           ├── file.js
+│   │           ├── message.js
+│   │           ├── modal.js
+│   │           ├── navbar.js
+│   │           ├── notification.js
+│   │           ├── panel.js
+│   │           ├── panelTabs.js
+│   │           └── tabs.js
+│   └── templates
+│       ├── auth
+│       │   ├── login.html
+│       │   └── sigup.html
+│       ├── base.html
+│       ├── includes
+│       │   ├── footer.html
+│       │   └── navbar.html
+│       └── index.html
+└── tests
+    ├── auth
+    │   ├── __init__.py
+    │   ├── test_models.py
+    │   └── test_views.py
+    ├── conftest.py
+    ├── factory.py
+    ├── __init__.py
+    └── test_api.py
 
-7 directories, 26 files
+19 directories, 54 files
 ```
