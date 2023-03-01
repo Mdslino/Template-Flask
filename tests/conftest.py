@@ -23,8 +23,8 @@ def setup_db(app):
         db.session.execute(text('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'))
         db.session.commit()
         yield
-        drop_database(sqlalchemy_database_uri)
         close_all_sessions()
+        drop_database(sqlalchemy_database_uri)
 
 
 @pytest.fixture(autouse=True)
