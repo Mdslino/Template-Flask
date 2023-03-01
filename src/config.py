@@ -4,14 +4,8 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    DEBUG: bool = False
-    FLASK_ADMIN_NAME: str = "Admin"
-    FLASK_ADMIN_TEMPLATE_MODE: str = "bootstrap4"
-    FLASK_ADMIN_SWATCH: str = "cerulean"
-    SQLALCHEMY_DATABASE_URI: str = (
-        "postgresql://postgres:postgres@localhost:5432/postgres"
-    )
-    SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
+    # Application Configuration
+    DEBUG: bool = True
     TITLE: str = "Template"
     SECRET_KEY: str = "jadkfbsdkjbfbh"
     PASSWORD_SCHEMES: List[str] = ["pbkdf2_sha512", "md5_crypt"]
@@ -20,9 +14,29 @@ class Settings(BaseSettings):
         "src.ext.migrations:init_app",
         "src.ext.auth:init_app",
         "src.ext.admin:init_app",
+        "src.ext.mail:init_app",
+        "src.ext.debug:init_app",
         "src.blueprints.webui:init_app",
         "src.auth.blueprints.webui:init_app",
     ]
+
+    # Flask-Admin Configuration
+    FLASK_ADMIN_NAME: str = "Admin"
+    FLASK_ADMIN_TEMPLATE_MODE: str = "bootstrap4"
+    FLASK_ADMIN_SWATCH: str = "cerulean"
+
+    # SQLAlchemy Configuration
+    SQLALCHEMY_DATABASE_URI: str = (
+        "postgresql://postgres:postgres@localhost:5432/postgres"
+    )
+    SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
+
+    # Flask-Mail Configuration
+    MAIL_SERVER: str = "smtp.gmail.com"
+    MAIL_PORT: int = 465
+    MAIL_USE_SSL: bool = True
+    MAIL_USERNAME: str = ""
+    MAIL_PASSWORD: str = ""
 
     TEMPLATES_AUTO_RELOAD: bool = True
     DEBUG_TOOLBAR_ENABLED: bool = True
