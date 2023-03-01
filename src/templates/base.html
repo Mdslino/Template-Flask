@@ -7,33 +7,47 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         {% block styles %}
+            <link
+                    rel="stylesheet"
+                    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+            />
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         {% endblock %}
         <title>{{ title }}</title>
     {% endblock %}
+    <script src={{ url_for('static', filename='js/bulma/navbar.js') }}></script>
+    <script src={{ url_for('static', filename='js/bulma/notification.js') }}></script>
+    <script src="https://cdn.jsdelivr.net/npm/bulma-toast@2.4.2/dist/bulma-toast.min.js "></script>
 </head>
 <body>
 <!-- Content -->
 <div class="container">
     {% include 'includes/navbar.html' %}
     <div class="columns">
+        {#        <section class="column is-half is-offset-one-quarter">#}
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
-                    <div class="notification is-{{ category }}">
-                        <button class="delete"></button>
-                        {{ message }}
-                    </div>
+                    <script>
+                        bulmaToast.toast({
+                            message: "{{ message }}",
+                            type: "is-{{ category }}",
+                            position: "top-right",
+                            duration: 2000,
+                            dismissible: true,
+                            pauseOnHover: true,
+                            animate: {in: "fadeIn", out: "fadeOut"}
+                        });
+                    </script>
                 {% endfor %}
             {% endif %}
         {% endwith %}
+        {#        </section>#}
         {% block messages %}{% endblock %}
 
         {% block content %}{% endblock %}
     </div>
 </div>
-<script src={{ url_for('static', filename='js/bulma/navbar.js') }}></script>
-<script src={{ url_for('static', filename='js/bulma/notification.js') }}></script>
 {% block scripts %}
 {% endblock %}
 </body>

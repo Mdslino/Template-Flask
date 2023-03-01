@@ -7,6 +7,10 @@ from src.ext.database import db
 
 
 def login():
+    """
+    Login View
+    Login user and redirect to index page
+    """
     form = LoginForm(request.form)
     if request.method == "POST":
         if form.validate_on_submit():
@@ -27,13 +31,24 @@ def login():
 
 def logout():
     logout_user()
+    flash("Logout realizado com sucesso.", "success")
     return redirect(url_for("webui.index"))
 
 
 def signup():
+    """
+    Signup View
+    Create new user and redirect to index page
+    """
     form = SignupForm()
     if request.method == "POST":
         if form.validate_on_submit():
+            if db.session.execute(
+                    db.select(User).where(User.username == form.username.data)
+            ).scalar_one_or_none():
+                flash("Usuário já cadastrado.", "warning")
+                return redirect(url_for("webui_auth.login"))
+
             user = User(username=form.username.data)
             user.set_password(form.password.data)
             db.session.add(user)
@@ -43,5 +58,5 @@ def signup():
             return redirect(url_for("webui.index"))
 
     return render_template(
-        "auth/login.html", form=form, title="Cadastrar", flow="Cadastrar"
+        "auth/sigup.html", form=form, title="Cadastrar"
     )
