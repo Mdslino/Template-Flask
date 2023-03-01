@@ -20,6 +20,7 @@ Flask-Migrate = "^4.0.4"
 Flask-Login = "^0.6.2"
 Flask-WTF = "^1.0.1"
 sqlalchemy-utils = "^0.40.0"
+flask-mail = "^0.9.1"
 
 
 [tool.poetry.group.dev.dependencies]
