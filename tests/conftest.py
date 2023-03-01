@@ -24,7 +24,6 @@ def setup_db(app):
         db.session.commit()
         yield
         close_all_sessions()
-        drop_database(sqlalchemy_database_uri)
 
 
 @pytest.fixture(autouse=True)
