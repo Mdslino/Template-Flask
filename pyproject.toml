@@ -30,7 +30,7 @@ flask-shell-ipython = "^0.4.1"
 ipdb = "^0.13.9"
 isort = "^5.10.1"
 mypy = "^1.0.1"
-python-dotenv = "^0.21.0"
+python-dotenv = "^1.0.0"
 
 
 [tool.poetry.group.test.dependencies]
