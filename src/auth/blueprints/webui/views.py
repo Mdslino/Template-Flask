@@ -44,7 +44,7 @@ def signup():
     if request.method == "POST":
         if form.validate_on_submit():
             if db.session.execute(
-                    db.select(User).where(User.username == form.username.data)
+                db.select(User).where(User.username == form.username.data)
             ).scalar_one_or_none():
                 flash("Usuário já cadastrado.", "warning")
                 return redirect(url_for("webui_auth.login"))
@@ -57,6 +57,4 @@ def signup():
             login_user(user)
             return redirect(url_for("webui.index"))
 
-    return render_template(
-        "auth/sigup.html", form=form, title="Cadastrar"
-    )
+    return render_template("auth/sigup.html", form=form, title="Cadastrar")

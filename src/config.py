@@ -6,7 +6,7 @@ from pydantic import BaseSettings
 class Settings(BaseSettings):
     DEBUG: bool = False
     FLASK_ADMIN_NAME: str = "Admin"
-    FLASK_ADMIN_TEMPLATE_MODE: str = "bootstrap3"
+    FLASK_ADMIN_TEMPLATE_MODE: str = "bootstrap4"
     FLASK_ADMIN_SWATCH: str = "cerulean"
     SQLALCHEMY_DATABASE_URI: str = (
         "postgresql://postgres:postgres@localhost:5432/postgres"
@@ -19,6 +19,7 @@ class Settings(BaseSettings):
         "src.ext.database:init_app",
         "src.ext.migrations:init_app",
         "src.ext.auth:init_app",
+        "src.ext.admin:init_app",
         "src.blueprints.webui:init_app",
         "src.auth.blueprints.webui:init_app",
     ]

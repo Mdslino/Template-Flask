@@ -42,6 +42,7 @@ Acesse:
 * [x] Migrações
 * [x] Testes
 * [x] Docker
+* [x] Admin
 
 
 ## Structure
