@@ -8,7 +8,7 @@
             <div class="field">
                 <label class="label">{{ form.username.label }}</label>
                 <div class="control">
-                    {{ form.username(class="input") }}
+                    {{ form.username(class="input is-rounded") }}
                     {% for error in form.username.errors %}
                         <p class="help is-danger">{{ error }}</p>
                     {% endfor %}
@@ -18,7 +18,7 @@
             <div class="field">
                 <label class="label">{{ form.password.label }}</label>
                 <div class="control">
-                    {{ form.password(class="input") }}
+                    {{ form.password(class="input is-rounded") }}
                     {% for error in form.password.errors %}
                         <p class="help is-danger">{{ error }}</p>
                     {% endfor %}
@@ -26,7 +26,7 @@
             </div>
 
             <div class="control">
-                {{ form.submit(class="button is-link") }}
+                {{ form.submit(class="button is-link is-rounded") }}
             </div>
         </form>
     </section>
