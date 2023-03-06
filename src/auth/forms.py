@@ -17,6 +17,13 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Entrar")
 
 
+class ResendActivationForm(FlaskForm):
+    username = EmailField(
+        "Email", validators=[DataRequired(message="Email é obrigatório")]
+    )
+    submit = SubmitField("Reenviar email de ativação")
+
+
 class SignupForm(FlaskForm):
     username = EmailField(
         "Email", validators=[DataRequired(message="Email é obrigatório")]

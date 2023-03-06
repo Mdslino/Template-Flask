@@ -2,7 +2,7 @@ from flask import current_app as app
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import login_user, logout_user
 
-from src.auth.forms import LoginForm, SignupForm
+from src.auth.forms import LoginForm, ResendActivationForm, SignupForm
 from src.auth.models import User
 from src.auth.utils import send_activation_email
 from src.ext.database import db
@@ -136,3 +136,30 @@ def active(user_external_id):
         flash("Usuário não encontrado.", "danger")
     logger.info("Redirecting to index")
     return redirect(url_for("webui.index"))
+
+
+def resend_email():
+    form = ResendActivationForm()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            if user := db.session.execute(
+                db.select(User).where(User.username == form.username.data)
+            ).scalar_one_or_none():
+                if not user.is_active:
+                    send_activation_email(user)
+                    flash(
+                        (
+                            "E-mail de ativação enviado com sucesso."
+                            " Favor verificar sua caixa de entrada."
+                        ),
+                        "success",
+                    )
+                else:
+                    flash("Usuário já está ativo.", "warning")
+            else:
+                flash("Usuário não encontrado.", "danger")
+    return render_template(
+        "auth/resend_email.html",
+        form=form,
+        title="Reenviar e-mail de ativação",
+    )
