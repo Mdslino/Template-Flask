@@ -17,7 +17,7 @@ class User(TimestampedModel):
     )
     username = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
-    is_active = db.Column(db.Boolean, default=True, nullable=False)
+    is_active = db.Column(db.Boolean, default=False, nullable=False)
 
     def __repr__(self):
         return f"<User {self.username}>"

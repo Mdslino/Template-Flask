@@ -4,6 +4,7 @@ from flask_login import login_user, logout_user
 
 from src.auth.forms import LoginForm, SignupForm
 from src.auth.models import User
+from src.auth.utils import send_activation_email
 from src.ext.database import db
 
 
@@ -23,6 +24,12 @@ def login():
                 db.select(User).where(User.username == form.username.data)
             ).scalar_one_or_none():
                 logger.info("User found")
+                if not user.is_active:
+                    logger.warning("User is not active")
+                    flash("Usuário não está ativo. Favor sua conta", "danger")
+                    return render_template(
+                        "auth/login.html", form=form, title="Entrar"
+                    )
                 if user.authenticate(form.password.data):
                     logger.info("User authenticated")
                     login_user(user)
@@ -89,9 +96,43 @@ def signup():
                 "User created and commited to database successfully %s",
                 user.username,
             )
-            flash("Cadastro realizado com sucesso.", "success")
+            send_activation_email(user)
+            flash(
+                (
+                    "Cadastro realizado com sucesso. Favor ativar sua conta"
+                    " através do e-mail recebido"
+                ),
+                "success",
+            )
             logger.info("Redirecting to index")
-            login_user(user)
             return redirect(url_for("webui.index"))
     logger.info("Rendering signup page")
     return render_template("auth/sigup.html", form=form, title="Cadastrar")
+
+
+def active(user_external_id):
+    """
+    Active View
+    Activate user account and redirect to index page
+    """
+    logger = app.logger
+
+    logger.info("Active attempt")
+    if user := db.session.execute(
+        db.select(User).where(User.external_id == user_external_id)
+    ).scalar_one_or_none():
+        logger.info("User found")
+        if user.is_active:
+            logger.warning("User is already active")
+            flash("Usuário já está ativo.", "warning")
+        else:
+            logger.info("Activating user")
+            user.is_active = True
+            db.session.commit()
+            logger.info("User activated successfully")
+            flash("Usuário ativado com sucesso.", "success")
+    else:
+        logger.warning("User not found")
+        flash("Usuário não encontrado.", "danger")
+    logger.info("Redirecting to index")
+    return redirect(url_for("webui.index"))

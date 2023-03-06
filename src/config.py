@@ -5,7 +5,7 @@ from pydantic import BaseSettings
 
 class Settings(BaseSettings):
     # Application Configuration
-    DEBUG: bool = True
+    DEBUG: bool = False
     TITLE: str = "Template"
     SECRET_KEY: str = "jadkfbsdkjbfbh"
     PASSWORD_SCHEMES: List[str] = ["pbkdf2_sha512", "md5_crypt"]
@@ -37,6 +37,7 @@ class Settings(BaseSettings):
     MAIL_USE_SSL: bool = True
     MAIL_USERNAME: str = ""
     MAIL_PASSWORD: str = ""
+    MAIL_DEFAULT_SENDER: str = ""
 
     TEMPLATES_AUTO_RELOAD: bool = True
     DEBUG_TOOLBAR_ENABLED: bool = True
