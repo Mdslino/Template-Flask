@@ -5,7 +5,6 @@ from sqlalchemy_utils import create_database, database_exists, drop_database
 
 from src.app import create_app
 from src.ext.database import db
-from tests.factory import UserFactory
 
 
 @pytest.fixture(scope="session")
@@ -33,8 +32,3 @@ def setup_tables(app):
         yield
         close_all_sessions()
         db.drop_all()
-
-
-@pytest.fixture
-def auth_user():
-    return UserFactory()

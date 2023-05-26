@@ -3,7 +3,6 @@ from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user
 
-from src.auth.models import User
 from src.config import settings
 from src.ext.database import db
 
@@ -29,8 +28,6 @@ admin = Admin(
     template_mode=settings.FLASK_ADMIN_TEMPLATE_MODE,
     index_view=AuthAdminIndexView(),
 )
-
-admin.add_view(AuthModelView(User, db.session))
 
 
 def init_app(app):

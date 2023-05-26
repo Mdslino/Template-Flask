@@ -14,12 +14,10 @@ class Settings(BaseSettings):
     EXTENSIONS: List[str] = [
         "src.ext.database:init_app",
         "src.ext.migrations:init_app",
-        "src.ext.auth:init_app",
         "src.ext.admin:init_app",
         "src.ext.mail:init_app",
         "src.ext.debug:init_app",
         "src.blueprints.webui:init_app",
-        "src.auth.blueprints.webui:init_app",
     ]
 
     # Flask-Admin Configuration
