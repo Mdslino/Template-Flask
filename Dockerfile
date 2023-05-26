@@ -1,4 +1,16 @@
-FROM python:3.10.7-slim-bullseye
+FROM node:alpine AS build
+
+WORKDIR /app
+
+COPY package.* /app
+
+RUN npm install
+
+COPY src/static/js /app/src/static/js
+
+RUN npm run build
+
+FROM python:3.11.3-slim AS run
 
 WORKDIR /app
 
@@ -12,5 +24,7 @@ RUN poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi --no-cache
 
 COPY . .
+
+COPY --from=build /app/src/static/js/aap.bundle.* /app/src/static/js
 
 EXPOSE 8000

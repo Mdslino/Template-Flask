@@ -5,3 +5,6 @@ Dockerfile
 docker-compose.yaml
 README.md
 .github/
+node_modules
+.pytest_cache
+.coverage
