@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "esbuild --bundle src/static/js/app.js --outfile=src/static/js/app.bundle.js --minify"
+    "build": "esbuild --bundle ./src/static/js/app.js --outfile=src/static/js/app.bundle.js --minify"
   },
   "repository": {
     "type": "git",

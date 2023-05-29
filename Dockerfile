@@ -1,16 +1,16 @@
-FROM node:alpine AS build
+FROM node:slim AS stage-build
 
-WORKDIR /app
+WORKDIR /node_build
 
-COPY package.* /app
+COPY package* /node_build/
 
 RUN npm install
 
-COPY src/static/js /app/src/static/js
+COPY . .
 
 RUN npm run build
 
-FROM python:3.11.3-slim AS run
+FROM python:3.11.3-slim AS stage-run
 
 WORKDIR /app
 
@@ -25,6 +25,6 @@ RUN poetry config virtualenvs.create false \
 
 COPY . .
 
-COPY --from=build /app/src/static/js/aap.bundle.* /app/src/static/js
+COPY --from=stage-build /node_build/src/static/js/app.bundle.* /app/src/static/js/
 
 EXPOSE 8000

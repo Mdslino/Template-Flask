@@ -11,8 +11,6 @@ services:
       - .env
     environment:
       SQLALCHEMY_DATABASE_URI: postgresql://postgres:postgres@db:5432/postgres
-    volumes:
-      - .:/app
     command: make run-dev
     depends_on:
       db:
