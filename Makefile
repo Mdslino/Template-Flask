@@ -35,7 +35,7 @@ run:
 	@gunicorn "src.app:create_app()" -k gevent -b 0.0.0.0:8000 -w 4 --preload --access-logfile=- --error-logfile=- --log-level info
 
 run-dev:
-	@gunicorn "src.app:create_app()" -k gevent --bind 0.0.0.0:8000 --preload --reload --access-logfile=- --error-logfile=- --log-level debug
+	@flask run --host=0.0.0.0 --port=8000 --reload --debugger --with-threads
 
 # Lint Section
 black:
