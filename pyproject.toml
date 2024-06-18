@@ -21,6 +21,7 @@ psycopg2-binary = "^2.9.3"
 pydantic = { extras = ["email"], version = "^2.7.4" }
 python = "^3.11"
 sqlalchemy-utils = "^0.41.0"
+pydantic-settings = "^2.3.3"
 
 
 [tool.poetry.group.dev.dependencies]
