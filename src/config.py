@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     DEBUG: bool = False
     TITLE: str = "Template"
     SERVER_NAME: str = "0.0.0.0:8000"
-    PREFERED_URL_SCHEME: str = "http"
+    PREFERRED_URL_SCHEME: str = "http"
     SECRET_KEY: str = "jadkfbsdkjbfbh"
     PASSWORD_SCHEMES: List[str] = ["pbkdf2_sha512", "md5_crypt"]
     EXTENSIONS: List[str] = [
