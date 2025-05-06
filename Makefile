@@ -11,10 +11,10 @@ install:
 	poetry install
 
 clean:
-	@find . -name '*.pyc' -exec rm -rf {} \;
-	@find . -name '__pycache__' -exec rm -rf {} \;
-	@find . -name 'Thumbs.db' -exec rm -rf {} \;
-	@find . -name '*~' -exec rm -rf {} \;
+	@find . -name '*.pyc' -exec rm -rf {} +
+	@find . -name '__pycache__' -exec rm -rf {} +
+	@find . -name 'Thumbs.db' -exec rm -rf {} +
+	@find . -name '*~' -exec rm -rf {} +
 	rm -rf .cache
 	rm -rf build
 	rm -rf dist
@@ -22,6 +22,8 @@ clean:
 	rm -rf htmlcov
 	rm -rf .tox/
 	rm -rf docs/_build
+	rm -rf .pytest_cache
+	rm -rf .mypy_cache
 
 # Test Section
 test:
@@ -38,27 +40,8 @@ run-dev:
 	@flask run --host=0.0.0.0 --port=8000 --reload --debugger --with-threads
 
 # Lint Section
-black:
-	@black .
-
-isort:
-	@isort .
-
-format-code: black isort
-
-sort-imports:
-	@isort .
-
-flake8:
-	@flake8 src/
+lint:
+	@./scripts/lint.sh $(MODE)
 
 mypy:
 	@mypy src/
-
-black-check:
-	@black --check src/
-
-isort-check:
-	@isort --check-only src/
-
-lint: flake8 black-check isort-check
