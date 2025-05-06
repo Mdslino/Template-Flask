@@ -12,7 +12,7 @@ class AuthAdminIndexView(AdminIndexView):
         return current_user.is_authenticated
 
     def inaccessible_callback(self, name, **kwargs):
-        return redirect(url_for("webui_auth.login"))
+        return redirect(url_for('webui_auth.login'))
 
 
 class AuthModelView(ModelView):
@@ -20,7 +20,7 @@ class AuthModelView(ModelView):
         return current_user.is_authenticated
 
     def inaccessible_callback(self, name, **kwargs):
-        return redirect(url_for("webui_auth.login"))
+        return redirect(url_for('webui_auth.login'))
 
 
 admin = Admin(

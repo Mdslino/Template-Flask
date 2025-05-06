@@ -7,16 +7,16 @@ from src.app import create_app
 from src.ext.database import db
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope='session')
 def app():
     app = create_app()
     return app
 
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(scope='session', autouse=True)
 def setup_db(app):
     with app.app_context():
-        sqlalchemy_database_uri = app.config["SQLALCHEMY_DATABASE_URI"]
+        sqlalchemy_database_uri = app.config['SQLALCHEMY_DATABASE_URI']
         if not database_exists(sqlalchemy_database_uri):
             create_database(sqlalchemy_database_uri)
         db.session.execute(text('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'))

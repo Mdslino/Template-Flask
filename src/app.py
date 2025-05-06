@@ -13,8 +13,8 @@ def create_app(**config):
     app = minimal_app(**config)
     configuration.load_extensions(app)
 
-    @app.route("/healthcheck")
+    @app.route('/healthcheck')
     def healthcheck():
-        return "ok"
+        return 'ok'
 
     return app
